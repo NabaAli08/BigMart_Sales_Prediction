@@ -1,4 +1,3 @@
-<img width="818" height="236" alt="image" src="https://github.com/user-attachments/assets/87ff7f7b-748b-4c05-9d4a-51c81610fd01" />
 # BigMart_Sales_Prediction
 Predict BigMart product sales using machine learning! This project cleans and explores sales data, engineers features, and builds regression models to forecast sales, helping businesses make data-driven decisions and optimize inventory efficiently.
 
@@ -83,5 +82,15 @@ Requires **BigMart sales dataset** (`train.csv` and `test.csv`). Place the CSV f
 * Visualizations and feature analysis are included in the notebooks.
 * Random Forest generally provides the highest accuracy (~R² = 0.85).
 
+  
+---
+## Output Screens
+Figure 1: Retail Sales Prediction Interface (Before Prediction)
+<img width="1830" height="867" alt="image" src="https://github.com/user-attachments/assets/b43ca32d-2c51-4690-be24-e486730448e1" />
+
+---
+
+Figure 2: Prediction Output with Feature Importance
+<img width="1879" height="864" alt="image" src="https://github.com/user-attachments/assets/0021340c-3e14-4e79-a162-3e60bfbc3fcb" />
 
 
