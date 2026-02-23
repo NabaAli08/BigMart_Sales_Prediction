@@ -1,12 +1,6 @@
 # BigMart_Sales_Prediction
 Predict BigMart product sales using machine learning! This project cleans and explores sales data, engineers features, and builds regression models to forecast sales, helping businesses make data-driven decisions and optimize inventory efficiently.
 
-
-
-# BigMart Sales Prediction
-
-A machine learning–based solution to predict item sales for BigMart stores using historical sales data. Helps store managers optimize inventory, improve supply chain efficiency, and make data-driven business decisions.
-
 ---
 
 ## Project Overview
