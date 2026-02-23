@@ -91,6 +91,7 @@ Figure 1: Retail Sales Prediction Interface (Before Prediction)
 ---
 
 Figure 2: Prediction Output with Feature Importance
-<img width="1879" height="864" alt="image" src="https://github.com/user-attachments/assets/0021340c-3e14-4e79-a162-3e60bfbc3fcb" />
+<img width="1889" height="866" alt="image" src="https://github.com/user-attachments/assets/755e7c29-6310-436e-a7e1-54721962949e" />
+
 
 
