@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Retail Sales Prediction</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .form-control,
+.form-select {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    padding: 10px;
+    transition: 0.3s ease;
+}
+
+/* Placeholder color */
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Dropdown options */
+.form-select option {
+    background-color: #1f1c2c;
+    color: white;
+}
+
+/* Focus effect (same for both) */
+.form-control:focus,
+.form-select:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: #ff4b2b;
+    box-shadow: 0 0 8px rgba(255, 75, 43, 0.5);
+    color: white;
+    outline: none;
+}
+.predict-btn {
+    background-color: #ff2e2e;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.predict-btn:hover {
+    background-color: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+}
+
+
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+
+    <h1 class="text-center mb-4">📊 Retail Sales Prediction</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <form action="/predict" method="POST">
+
+                    <input type="number" step="any" name="Item_Weight" class="form-control mb-3" placeholder="Item Weight" required>
+
+                    <select name="Item_Fat_Content" class="form-select mb-3" required>
+                    <option value="" disabled selected>Select Fat Content</option>
+                    <option value="Low Fat">Low Fat</option>
+                    <option value="Regular">Regular</option>
+                    </select>
+
+
+                    <input type="number" step="any" name="Item_Visibility" class="form-control mb-3" placeholder="Item Visibility" required>
+
+                    <input type="number" step="any" name="Item_MRP" class="form-control mb-3" placeholder="Item MRP" required>
+
+                    <input type="number" name="Outlet_Establishment_Year" class="form-control mb-3" placeholder="Outlet Establishment Year" required>
+
+                    <select name="Item_Type" class="form-select mb-3" required>
+                        <option disabled selected hidden>Select Item Type</option>
+                        <option value="Dairy">Dairy</option>
+                        <option value="Soft Drinks">Soft Drinks</option>
+                        <option value="Meat">Meat</option>
+                        <option value="Fruits and Vegetables">Fruits and Vegetables</option>
+                    </select>
+
+                    <select name="Outlet_Size" class="form-select mb-3" required>
+                        <option value="">Outlet Size</option>
+                        <option value="Small">Small</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+
+                    <select name="Outlet_Location_Type" class="form-select mb-3" required>
+                        <option value="">Outlet Location Type</option>
+                        <option value="Tier 1">Tier 1</option>
+                        <option value="Tier 2">Tier 2</option>
+                        <option value="Tier 3">Tier 3</option>
+                    </select>
+
+                    <select name="Outlet_Type" class="form-select mb-3" required>
+                        <option value="">Outlet Type</option>
+                        <option value="Supermarket Type1">Supermarket Type1</option>
+                        <option value="Supermarket Type2">Supermarket Type2</option>
+                        <option value="Grocery Store">Grocery Store</option>
+                    </select>
+
+                    <button type="submit" class="btn w-100 mt-3 predict-btn">
+                    Predict Sales
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+            {% if prediction %}
+            <div class="card p-4 text-center">
+                <h3>Predicted Sales</h3>
+                <h1 class="text-warning">₹ {{ prediction }}</h1>
+            </div>
+
+            <div class="card p-4 mt-4">
+                <h4 class="text-center">Feature Importance</h4>
+                <canvas id="importanceChart"></canvas>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% if prediction %}
+<script>
+    const ctx = document.getElementById('importanceChart').getContext('2d');
+
+    const importanceChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ feature_names | safe }},
+            datasets: [{
+                label: 'Importance',
+                data: {{ feature_importance | safe }},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endif %}
+
+</body>
+</html>
